@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using SalesWebMVC.Data;
 using SalesWebMVC.Models;
+
 
 namespace SalesWebMVC.Services
 {
@@ -23,7 +25,7 @@ namespace SalesWebMVC.Services
 
         public Seller FindById(int id)
         {
-            return _context.Seller.SingleOrDefault(x => x.Id == id);
+            return _context.Seller.Include(obj => obj.Department).SingleOrDefault(x => x.Id == id);
         }
 
         public void Insert(Seller obj)
